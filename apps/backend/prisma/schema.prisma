@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+}
+
+enum PostStatus {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+  FAILED
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      UserRole @default(ADMIN)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("users")
+}
+
+model Verse {
+  id                 String   @id @default(cuid())
+  surah              Int
+  verseNumber        Int      @map("verse_number")
+  verseKey           String   @unique @map("verse_key")
+  arabicText         String   @map("arabic_text") @db.Text
+  frenchTranslation  String   @map("french_translation") @db.Text
+  englishTranslation String   @map("english_translation") @db.Text
+  createdAt          DateTime @default(now()) @map("created_at")
+
+  tafsirs Tafsir[]
+  posts   Post[]
+
+  @@unique([surah, verseNumber])
+  @@map("verses")
+}
+
+model Tafsir {
+  id        String   @id @default(cuid())
+  verseId   String   @map("verse_id")
+  source    String
+  content   String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+
+  verse Verse @relation(fields: [verseId], references: [id], onDelete: Cascade)
+
+  @@unique([verseId, source])
+  @@map("tafsirs")
+}
+
+model Post {
+  id             String     @id @default(cuid())
+  verseId        String?    @map("verse_id")
+  arabicContent  String?    @map("arabic_content") @db.Text
+  frenchContent  String?    @map("french_content") @db.Text
+  englishContent String?    @map("english_content") @db.Text
+  status         PostStatus @default(DRAFT)
+  scheduledAt    DateTime?  @map("scheduled_at")
+  publishedAt    DateTime?  @map("published_at")
+  createdAt      DateTime   @default(now()) @map("created_at")
+
+  verse Verse? @relation(fields: [verseId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([scheduledAt])
+  @@map("posts")
+}
+
+model FacebookAccount {
+  id          String   @id @default(cuid())
+  pageId      String   @unique @map("page_id")
+  pageName    String   @map("page_name")
+  accessToken String   @map("access_token")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("facebook_accounts")
+}
