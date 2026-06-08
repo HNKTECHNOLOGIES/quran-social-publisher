@@ -34,6 +34,32 @@ export class RedisService implements OnModuleDestroy {
     return this.client;
   }
 
+  async getJson<T>(key: string): Promise<T | null> {
+    if (!this.client) return null;
+    try {
+      const raw = await this.client.get(key);
+      if (!raw) return null;
+      return JSON.parse(raw) as T;
+    } catch {
+      return null;
+    }
+  }
+
+  async setJson(
+    key: string,
+    value: unknown,
+    ttlSeconds = 3600,
+  ): Promise<void> {
+    if (!this.client) return;
+    try {
+      await this.client.set(key, JSON.stringify(value), 'EX', ttlSeconds);
+    } catch (err) {
+      this.logger.warn(
+        `Redis set failed for ${key}: ${err instanceof Error ? err.message : err}`,
+      );
+    }
+  }
+
   async onModuleDestroy() {
     await this.client?.quit();
   }

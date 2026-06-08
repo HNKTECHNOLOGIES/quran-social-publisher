@@ -84,10 +84,10 @@ export default function DashboardPage() {
       </div>
 
       <div className="mt-10 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
-        <p className="text-lg font-semibold text-slate-700">Phase 1 — MVP</p>
+        <p className="text-lg font-semibold text-slate-700">Phase 2 — Versets</p>
         <p className="mt-2 text-sm text-slate-500">
-          Prochaines étapes : recherche de versets, tafsir, génération GPT
-          trilingue et publication Facebook.
+          Recherche de versets et tafsirs disponibles. Prochaines étapes :
+          génération GPT trilingue et publication Facebook.
         </p>
       </div>
     </div>

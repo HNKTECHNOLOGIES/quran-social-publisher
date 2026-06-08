@@ -11,7 +11,15 @@ Application SaaS pour publier automatiquement du contenu islamique authentique (
 | Auth | JWT |
 | Déploiement | Docker, Railway |
 
-## Phase 1 (actuelle)
+## Phase 2 (actuelle)
+
+- Intégration API [Quran.com](https://api.quran.com/api/v4)
+- Recherche par mot-clé, sourate ou numéro de verset
+- Traductions FR (Montada) et EN (Saheeh International)
+- Tafsirs autorisés : Ibn Kathir, Al-Sa'di (Al-Jalalayn si disponible via l'API)
+- Cache Redis + persistance PostgreSQL
+
+## Phase 1
 
 - Monorepo NestJS + Next.js
 - Schéma Prisma (`users`, `verses`, `tafsirs`, `posts`, `facebook_accounts`)
@@ -46,6 +54,6 @@ npm run dev
 
 | Phase | Fonctionnalités |
 |-------|-----------------|
-| 2 | API Quran.com, tafsir, recherche versets |
+| 2 | ✅ API Quran.com, tafsir, recherche versets |
 | 3 | Génération GPT trilingue |
 | 4 | Facebook Graph API, cron 08h00 |
