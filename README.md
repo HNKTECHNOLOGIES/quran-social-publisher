@@ -7,7 +7,7 @@ Application SaaS pour publier automatiquement du contenu islamique authentique (
 | Couche | Technologie |
 |--------|-------------|
 | Backend | NestJS, TypeScript, Prisma, PostgreSQL, Redis |
-| Frontend | Next.js 15, TailwindCSS |
+| Frontend | Next.js 15, application mobile (PWA) |
 | Auth | JWT |
 | Déploiement | Docker, Railway |
 
@@ -44,9 +44,28 @@ npm run dev
 - Email : `admin@qsp.local`
 - Mot de passe : `Admin123!`
 
+### Application mobile
+
+Le frontend Next.js est l’application mobile : colonne téléphone, barre d’onglets, sourates, verset et recherche. Elle s’installe depuis le navigateur (`manifest`, écran d’accueil).
+
+L’app native Expo (`apps/mobile`) reprend le même parcours sur Android et iOS. Elle appelle la même API.
+
+```bash
+cd apps/mobile
+npm install
+npm run web
+```
+
+- Web : http://localhost:8081
+- Android / iOS : `npm run android` ou `npm run ios` (Expo Go, SDK 58)
+- API : `EXPO_PUBLIC_API_URL` (défaut `http://localhost:3002/api`)
+
+Le serveur de développement web tourne sur le port 8081, déjà autorisé dans `CORS_ORIGIN`.
+
 ### URLs
 
-- Frontend : http://localhost:3000
+- Application mobile : http://localhost:3000
+- Application mobile (web) : http://localhost:8081
 - API : http://localhost:3002/api
 - Swagger : http://localhost:3002/api/docs
 

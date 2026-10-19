@@ -15,7 +15,7 @@ export default function HomePage() {
   }, [user, loading, router]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex h-dvh items-center justify-center">
       <p className="text-slate-500">Chargement...</p>
     </div>
   );

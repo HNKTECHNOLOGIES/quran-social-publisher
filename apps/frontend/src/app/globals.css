@@ -9,5 +9,9 @@
 }
 
 body {
-  @apply bg-slate-50 text-slate-900 antialiased;
+  @apply bg-[#0b241c] text-slate-900 antialiased;
+}
+
+.font-arabic {
+  font-family: var(--font-arabic), "Noto Naskh Arabic", serif;
 }

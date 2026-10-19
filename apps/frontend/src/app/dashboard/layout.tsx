@@ -1,6 +1,6 @@
 'use client';
 
-import { Sidebar } from '@/components/Sidebar';
+import { BottomNav } from '@/components/BottomNav';
 import { AuthGuard } from '@/components/AuthGuard';
 
 export default function DashboardLayout({
@@ -10,9 +10,9 @@ export default function DashboardLayout({
 }) {
   return (
     <AuthGuard>
-      <div className="flex min-h-screen">
-        <Sidebar />
-        <main className="flex-1 overflow-auto">{children}</main>
+      <div className="flex h-dvh max-h-dvh w-full flex-col overflow-hidden">
+        <main className="min-h-0 flex-1 overflow-y-auto">{children}</main>
+        <BottomNav />
       </div>
     </AuthGuard>
   );
