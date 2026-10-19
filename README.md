@@ -44,9 +44,26 @@ npm run dev
 - Email : `admin@qsp.local`
 - Mot de passe : `Admin123!`
 
+### Application mobile
+
+L’app Expo (`apps/mobile`) reprend la lecture du Coran : connexion, sourates, verset (arabe, FR, EN, tafsirs) et recherche. Elle appelle la même API.
+
+```bash
+cd apps/mobile
+npm install
+npm run web
+```
+
+- Web : http://localhost:8081
+- Android / iOS : `npm run android` ou `npm run ios` (Expo Go, SDK 58)
+- API : `EXPO_PUBLIC_API_URL` (défaut `http://localhost:3002/api`)
+
+Le serveur de développement web tourne sur le port 8081, déjà autorisé dans `CORS_ORIGIN`.
+
 ### URLs
 
-- Frontend : http://localhost:3000
+- Frontend web : http://localhost:3000
+- Application mobile (web) : http://localhost:8081
 - API : http://localhost:3002/api
 - Swagger : http://localhost:3002/api/docs
 
