@@ -16,11 +16,11 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
 
   if (loading || !user) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
+      <div className="flex h-dvh items-center justify-center">
         <p className="text-slate-500">Chargement...</p>
       </div>
     );
   }
 
-  return <>{children}</>;
+  return children;
 }
